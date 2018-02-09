@@ -1,7 +1,6 @@
 import React, { Component, DrawerLayoutAndroid, Dimensions } from 'react';
 import { AppRegistry, Text, View, Button, StyleSheet } from 'react-native';
 import Header from '../header/Header.component';
-import Footer from '../footer/footer.component';
 import Content from '../content/content.component';
 
 export default class Home extends Component {

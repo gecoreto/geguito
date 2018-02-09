@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AppRegistry, Text, View, TextInput, Switch, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import Footer from '../footer/footer.component';
+
 
 export default class Content extends Component {
     iconPiedra = require('../../../assets/images/piedra.png');
