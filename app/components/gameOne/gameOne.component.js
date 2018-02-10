@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, Text, View, TextInput, Switch, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
 
-export default class Content extends Component {
+export default class GameOne extends Component {
     iconPiedra = require('../../../assets/images/piedra.png');
     iconPapel = require('../../../assets/images/papel.png');
     iconTijera = require('../../../assets/images/tijera.png');
@@ -100,7 +100,7 @@ export default class Content extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1, flexDirection: 'column' }}>
+            <View style={{ flex: 1, flexDirection: 'column', backgroundColor: '#4a7e6b' }}>
                 <View style={{ alignItems: 'center', padding: 10, height: 100 }}>
                     <Text style={styles.titleText}> Selecciona una opción </Text>
                 </View>
@@ -217,4 +217,4 @@ const styles = StyleSheet.create({
     }
 })
 
-AppRegistry.registerComponent('Content', () => Content);
+AppRegistry.registerComponent('GameOne', () => GameOne);
