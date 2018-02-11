@@ -6,6 +6,4 @@ Developed using the react native technology
 
 <img src="https://i.imgur.com/tG0JUx8.gif">
 
-<img src="https://i.imgur.com/tG0JUx8.gif">
-
-<img src="https://i.imgur.com/KYfQHa3.gif">
+<img src="https://i.imgur.com/nWQwxwd.gif">
