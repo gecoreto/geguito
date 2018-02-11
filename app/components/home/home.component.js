@@ -4,11 +4,13 @@ import Footer from '../footer/footer.component';
 
 export default class Home extends React.Component {
   
-  // static navigationOptions = {
-  //   header: {
-  //     visible: false,
-  //   }
-  // };
+  static navigationOptions = {
+    header: null,
+    headerTitle: '',
+    headerTitleStyle:{
+      color: '#FFF'
+    }
+  };
 
   constructor(props) {
     super(props);
@@ -24,7 +26,7 @@ export default class Home extends React.Component {
         <TouchableOpacity onPress={() => this.props.navigation.navigate('GameOne')}>
           <Text style={styles.button}>PIEDRA PAPEL O TIJERA</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('GameTwo')}>
           <Text style={styles.button}>TRIQUI</Text>
         </TouchableOpacity>
         <Footer/>

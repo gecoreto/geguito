@@ -12,10 +12,11 @@ import {
   View
 } from 'react-native';
 import {
-  StackNavigator,
+  StackNavigator
 } from 'react-navigation';
 import Home from './app/components/home/home.component';
 import GameOne from './app/components/gameOne/gameOne.component';
+import GameTwo from './app/components/gameTwo/gameTwo.component';
 
 const RootStack = StackNavigator(
   {
@@ -23,19 +24,22 @@ const RootStack = StackNavigator(
       screen: Home,
     },
     GameOne: {
-      screen: GameOne
+      screen: GameOne //Piedra papel o tijera
+    },
+    GameTwo:{
+      screen: GameTwo //Triqui
     }
-
   },
   {
-    initialRouteName: 'Home',
-    headerMode: 'none',
-    navigationOptions:{
+    initialRouteName: 'Home', // Initial view
+    headerMode: 'screen',
+    navigationOptions: {
       headerTitle: 'GEGUITOS',
-      headerTitleStyle:{
-        color: '#FFF'
+      headerTitleStyle: {
+        color: '#FFF',
+        fontWeight: 'bold', fontSize: 20,
       },
-      headerStyle:{
+      headerStyle: {
         backgroundColor: '#4a7e6b'
       }
     }
