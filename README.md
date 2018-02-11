@@ -1,6 +1,9 @@
 # geguito (React-native)
-Game of  stone paper or scissors (Piedra, papel o tijera)
-Game of Triqui
+Development of games using javascript and react native:
+
+# List of games
+- Game of  stone paper or scissors (Piedra, papel o tijera)
+- Game of Triqui
 
 Developed using the react native technology
 
