@@ -1,20 +1,38 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, View, TextInput, Switch, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import {
+    AppRegistry, Text, View, TextInput, Switch, StyleSheet, TouchableOpacity, Image,
+    Animated
+} from 'react-native';
 
 
-export default class GameOne extends Component {
+export default class GameOne extends React.Component {
     iconPiedra = require('../../../assets/images/piedra.png');
     iconPapel = require('../../../assets/images/papel.png');
     iconTijera = require('../../../assets/images/tijera.png');
 
     constructor() {
         super();
+        this.springValuePi = new Animated.Value (1);
+        this.springValuePa = new Animated.Value (1);
+        this.springValueTi = new Animated.Value (1);
         this.state = {
             tuSeleccion: false,
             maquinaSeleccion: false,
             resultado: false,
             backgroundResultado: ''
         }
+    }
+
+    spring(value) {
+        value.setValue(0.3)
+        Animated.spring(
+            value,
+            {
+                toValue: 1,
+                friction: 10,
+                useNativeDriver: true
+            }
+        ).start()
     }
 
     onPress = (seleccion) => {
@@ -24,14 +42,17 @@ export default class GameOne extends Component {
             case 'piedra':
                 icon = require('../../../assets/images/piedra.png');
                 valorSel = 1;
+                this.spring(this.springValuePi);
                 break
             case 'papel':
                 icon = require('../../../assets/images/papel.png');
                 valorSel = 1;
+                this.spring(this.springValuePa);
                 break
             case 'tijera':
                 icon = require('../../../assets/images/tijera.png');
                 valorSel = 1;
+                this.spring(this.springValueTi);
                 break
         }
 
@@ -65,30 +86,30 @@ export default class GameOne extends Component {
         if (seleccion == opcion) {
             resultado = 'Empate';
             backgroundResultado = '#FFC107';
-        } else if(seleccion == 'piedra'){
-            if(opcion == 'papel'){
+        } else if (seleccion == 'piedra') {
+            if (opcion == 'papel') {
                 resultado = 'Perdiste';
                 backgroundResultado = '#B71C1C';
-            }else{
+            } else {
                 resultado = 'Ganaste!!';
                 backgroundResultado = '#64DD17';
-            }            
-        }else if(seleccion == 'papel'){
-            if(opcion == 'tijera'){
+            }
+        } else if (seleccion == 'papel') {
+            if (opcion == 'tijera') {
                 resultado = 'Perdiste';
                 backgroundResultado = '#B71C1C';
-            }else{
+            } else {
                 resultado = 'Ganaste!!';
                 backgroundResultado = '#64DD17';
-            }            
-        }else if(seleccion == 'tijera'){
-            if(opcion == 'piedra'){
+            }
+        } else if (seleccion == 'tijera') {
+            if (opcion == 'piedra') {
                 resultado = 'Perdiste';
                 backgroundResultado = '#B71C1C';
-            }else{
+            } else {
                 resultado = 'Ganaste!!';
                 backgroundResultado = '#64DD17';
-            }            
+            }
         }
 
         this.setState({
@@ -106,19 +127,19 @@ export default class GameOne extends Component {
                 </View>
                 <View style={styles.containerButtons}>
                     <TouchableOpacity
-                        style={styles.piedra}
+                        style={[styles.piedra, {transform: [{scale: this.springValuePi}]}]}
                         onPress={() => this.onPress('piedra')}
                     >
                         <Image style={styles.image} source={this.iconPiedra} />
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={styles.papel}
+                        style={[styles.papel, {transform: [{scale: this.springValuePa}]}]}
                         onPress={() => this.onPress('papel')}
                     >
                         <Image style={styles.image} source={this.iconPapel} />
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={styles.tijera}
+                        style={[styles.tijera, {transform: [{scale: this.springValueTi}]}]}
                         onPress={() => this.onPress('tijera')}
                     >
                         <Image style={styles.image} source={this.iconTijera} />

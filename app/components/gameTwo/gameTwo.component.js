@@ -8,7 +8,8 @@ import {
     TouchableHighlight,
     Alert,
     Button,
-    TouchableOpacity
+    TouchableOpacity,
+    Animated
 } from 'react-native';
 import GridView from 'react-native-super-grid';
 
@@ -28,16 +29,41 @@ export default class GameTwo extends Component {
 
     constructor(props) {
         super(props);
+        //Animated
+        this.animatedValue = []
+        items.forEach((item, i) => {
+            this.animatedValue[item.ide] = new Animated.Value(0)
+        });
+        //
         this.onPressRow.bind(this);
         this.onPressReset.bind(this);
         this.state = {
             data: items,
-            ficha: 'X'
+            ficha: 'X',
+            gano: false
         }
     }
 
+    componentDidMount() {
+        this.onPressReset();
+        this.animate()
+    }
+
+    animate() {
+        const animations = items.map((item, i) => {
+            return Animated.timing(
+                this.animatedValue[item.ide],
+                {
+                    toValue: 1,
+                    duration: 300
+                }
+            )
+        })
+        Animated.sequence(animations).start()
+    }
+
     onPressRow(item, itemId) {
-        if (item.isSelect)
+        if (item.isSelect || this.state['gano'])
             return
         item.isSelect = !item.isSelect;
         item.name = this.getFicha();
@@ -74,12 +100,13 @@ export default class GameTwo extends Component {
             if (select1.length > 0 && select2.length > 0 && select3.length > 0) {
                 if ((select1 == select2) && (select1 == select3)) {
                     gano = true;
+                    this.setState({gano: true});
                     Alert.alert(
                         'Resultado',
                         'Gano la ' + select1,
-                        [
-                            { text: 'OK', onPress: () => this.onPressReset() },
-                        ]
+                        // [
+                        //     { text: 'OK', onPress: () => this.onPressReset() },
+                        // ]
                     )
                 }
             }
@@ -91,12 +118,13 @@ export default class GameTwo extends Component {
             }
         });
         if (vacios == 0 && gano == false) {
+            this.setState({gano: true});
             Alert.alert(
                 'Resultado',
                 'Empate',
-                [
-                    { text: 'OK', onPress: () => this.onPressReset() },
-                ]
+                // [
+                //     { text: 'OK', onPress: () => this.onPressReset() },
+                // ]
             )
         }
     }
@@ -108,10 +136,13 @@ export default class GameTwo extends Component {
             item.isSelect = false;
             item.name = '';
             item.code = '#00695C';
+            this.animatedValue[item.ide].setValue(0);
         });
         this.setState({
-            data: dataClone
+            data: dataClone,
+            gano: false
         });
+        this.animate();
     }
 
     render() {
@@ -123,11 +154,11 @@ export default class GameTwo extends Component {
                     style={styles.gridView}
                     renderItem={(item, i) => (
                         <TouchableHighlight onPress={() => this.onPressRow(item, item.ide)}>
-                            <View style={[styles.itemContainer, { backgroundColor: item.code }]}>
+                            <Animated.View style={[styles.itemContainer, { opacity: this.animatedValue[item.ide], backgroundColor: item.code }]}>
                                 <Text style={styles.itemName}>{item.name}</Text>
                                 {/* <Text style={styles.style_text}>{item.isSelect ? 'true' : 'false'}   </Text>*/}
                                 {/* <Text style={styles.style_text}>{item.ide}   </Text> */}
-                            </View>
+                            </Animated.View>
                         </TouchableHighlight>
                     )}
                 />

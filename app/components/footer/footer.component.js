@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppRegistry, Text, View, Button, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { AppRegistry, Text, View, Button, StyleSheet, TouchableOpacity, Dimensions, Linking } from 'react-native';
 
 export default class Footer extends React.Component {
 
@@ -11,8 +11,11 @@ export default class Footer extends React.Component {
     //var width = Dimensions.get('window').width; //full width
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Power by gecoreto</Text>
+        <TouchableOpacity onPress={() => Linking.openURL('https://github.com/gecoreto')}>
+          <Text style={styles.title}>Power by gecoreto</Text>
+        </TouchableOpacity>
       </View>
+
     );
   }
 }
